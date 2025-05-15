@@ -29,6 +29,12 @@ Route::group(['prefix'=> 'Vacalog'], function () {
     Route::middleware('auth')->group(function () {
 Route::resource('/portal', \App\Http\Controllers\PortalController::class);
 
+
+Route::post('/vacaciones/solicitar', [\App\Http\Controllers\VacacionesController::class, 'store'])->name('vacaciones.solicitar');
+
+
+Route::get('listar', [\App\Http\Controllers\VacacionesController::class, 'listtable'])->name('vacaciones.listar');
+
 });
 
 

@@ -12,11 +12,16 @@ class PortalController extends Controller{
 
 public function index()
 {
-    $user = \Auth::user();
+    $user = Auth::user();
     $trabajador = $user->trabajador;
+    $infoVacaciones = \App\Models\InfoVacaciones::where('trabajador_id', $user->trabajador_id)->first();
 
-    return view('portal', compact('trabajador'));
+
+
+    return view('portal', compact('trabajador','infoVacaciones'));
 }
+
+
 
 
 
