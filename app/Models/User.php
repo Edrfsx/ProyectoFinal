@@ -33,7 +33,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
-
+public function trabajador()
+{
+    return $this->belongsTo(\App\Models\Trabajadores::class, 'trabajador_id');
+}
     /**
      * The attributes that should be cast.
      *

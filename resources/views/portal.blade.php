@@ -1,6 +1,9 @@
 @extends('plantilla')
 @section('barra')
-{{ $trabajador->Nombre }}
+@if ($trabajador)
+    {{ $trabajador->Nombre }}
+@endif
+
 @endsection
 
 @section('content')

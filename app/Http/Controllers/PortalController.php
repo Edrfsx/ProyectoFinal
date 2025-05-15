@@ -10,11 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PortalController extends Controller{
 
-    public function index(){
-            $trabajador = Auth::user()->trabajador;
+public function index()
+{
+    $user = \Auth::user();
+    $trabajador = $user->trabajador;
 
     return view('portal', compact('trabajador'));
-    }
+}
+
 
 
 
