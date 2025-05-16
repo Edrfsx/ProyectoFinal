@@ -11,11 +11,11 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
-            <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required>
+            <input type="date" class="form-control" name="Fecha_inicio" id="Fecha_inicio" required>
           </div>
           <div class="mb-3">
             <label for="fecha_fin" class="form-label">Fecha de Fin</label>
-            <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" required>
+            <input type="date" class="form-control" name="Fecha_fin" id="Fecha_fin" required>
           </div>
         </div>
         <div class="modal-footer">

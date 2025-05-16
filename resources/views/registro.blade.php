@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('plantilla')
+@section('barra')
+@endsection
+@section('content')
+<div class="col-lg-12 col-md-12 col-xs-12">
     <form method="POST" action="{{ route('registrar') }}">
         @csrf
-        <input type="text" id="usuario" name="usuario">
+        <label>Usuario</label>
+        <input type="text" id="usuario" name="usuario" required>
         <br>
-        <input type="text" id="password" name="password">
+        <label>Contraseña</label>
+        <input type="text" id="password" name="password" required>
         <br>
-        <input type="number" id="trabajador_id" name="trabajador_id">
+        <label>Id del Trabajador</label>
+        <input type="number" id="trabajador_id" name="trabajador_id" required>
         <br>
+        <label>Id de Jefe</label>
+        <input type="number" id="jefe_id" name="jefe_id" required>
         <button type="submit">Enviar</button>
     </form>
-</body>
-</html>
+</div>
+@endsection

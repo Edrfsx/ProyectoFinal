@@ -49,5 +49,28 @@
                 ]
             });
         });
+
+        $.ajax({
+    url: '/Vacalog/vacaciones/solicitar',
+    type: 'POST',
+    data: {
+        Fecha_inicio: Fecha_inicio,
+        Fecha_fin: Fecha_fin,
+        _token: '{{ csrf_token() }}'
+    },
+    success: function (data) {
+        Swal.fire('Solicitud enviada', 'Tu solicitud fue registrada.', 'success');
+        tabla.ajax.reload();
+    },
+    error: function (xhr) {
+        if (xhr.status === 422) {
+            const message = xhr.responseJSON.message || 'Error en la solicitud.';
+            Swal.fire('Error', message, 'error');
+        } else {
+            Swal.fire('Error', 'Ocurrió un problema al enviar la solicitud.', 'error');
+        }
+    }
+});
+
     </script>
 @endsection

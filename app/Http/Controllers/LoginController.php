@@ -21,8 +21,17 @@ class LoginController extends Controller{
             'usuario' => $request->usuario, 'password' => $request->password])) {
 
 
+                $usu = \App\Models\User::where('usuario',$request->usuario)
+                ->first();
+
+                if($usu->trabajador_id >0){
             $request->session()->regenerate();
-            return redirect()->intended(route("portal.index"));
+            return redirect()->intended(route("portal.index"));}
+
+            if($usu->jefe_id > 0 ){
+                $request->session()->regenerate();
+                return redirect()->intended(route("index.index"));
+            }
 
         }else{
             return redirect("/Vacalog/login");
@@ -36,6 +45,7 @@ class LoginController extends Controller{
         $user->usuario = $request->usuario;
         $user->password = Hash::make($request->password);
         $user->trabajador_id = $request->trabajador_id;
+        $user->jefe_id = $request->jefe_id;
 
         $user->save();
 
@@ -45,6 +55,27 @@ class LoginController extends Controller{
 
 
     }
+
+    public function registrarTrabajador(Request $request)
+{
+    // Validar los campos
+    $validated = $request->validate([
+        'Nombre' => 'required|string|max:255',
+        'Apellidos' => 'required|string|max:255',
+        'Sexo' => 'required|in:Hombre,Mujer,Otros',
+        'Email' => 'required|email|unique:Trabajadores,Email',
+        'Ocupacion' => 'required|string|max:255',
+        'Salario' => 'required|numeric|min:0',
+        'Fecha_alta' => 'required|date',
+    ]);
+
+    // Crear un nuevo trabajador
+    $trabajador = \App\Models\Trabajadores::create($validated);
+
+    // Redireccionar o retornar respuesta
+    return redirect()->back()->with('success', 'Trabajador registrado correctamente');
+}
+
 
     public function logout(Request $request){
         Auth::logout();

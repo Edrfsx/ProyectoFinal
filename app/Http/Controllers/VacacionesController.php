@@ -25,25 +25,22 @@ public function store(Request $request)
 {
     $user = Auth::user();
 
-    
-
     // Buscar el InfoVacaciones correspondiente
     $info = \App\Models\InfoVacaciones::where('trabajador_id', $user->trabajador_id)->first();
+
+
 
     // Crear el registro de vacaciones incluyendo la foreign key
     $data = \App\Models\Vacaciones::create([
         'trabajador_id' => $user->trabajador_id,
-        'info_vacaciones_id' => $info->Id ,
-        'Fecha_inicio' => $request->input('fecha_inicio'),
-        'Fecha_fin' => $request->input('fecha_fin'),
+        'info_vacaciones_id' => $info->Id,
+        'Fecha_inicio' => $request->input('Fecha_inicio'),
+        'Fecha_fin' => $request->input('Fecha_fin'),
         'Estado' => 'En proceso',
-        
     ]);
 
-    // Recalcular los días usados
     $this->recalcularVacaciones($user->trabajador_id);
 
-    
     if ($request->ajax()) {
         return response()->json(['success' => true, 'data' => $data]);
     } else {
@@ -53,22 +50,20 @@ public function store(Request $request)
 
 
 
+
 public function recalcularVacaciones($trabajadorId)
 {
     
-    // Obtener el InfoVacaciones del trabajador
     $info = \App\Models\InfoVacaciones::where('trabajador_id', $trabajadorId)->first();
     if (!$info) {
         return;
     }
     
 
-    // Obtener vacaciones aceptadas del trabajador
     $vacaciones = \App\Models\Vacaciones::where('trabajador_id', $trabajadorId)
         ->whereIn('Estado', ['Aceptado','En proceso'])
         ->get();
 
-    // Calcular total de días usados
     $totalDiasUsados = 0;
     foreach ($vacaciones as $vacacion) {
         $inicio = Carbon::parse($vacacion->Fecha_inicio);
@@ -77,13 +72,19 @@ public function recalcularVacaciones($trabajadorId)
         $totalDiasUsados += $dias;
     }
 
-    // Valor base de días disponibles (puedes cambiarlo o guardarlo en otra columna)
     $diasTotalesAnuales = 44;
 
-    // Actualizar valores
     $info->Dias_usados = $totalDiasUsados;
     $info->Dias_disponibles = $diasTotalesAnuales - $totalDiasUsados;
-    $info->save();
+    
+    $updated = \App\Models\InfoVacaciones::where('trabajador_id', $trabajadorId)
+    ->update(['Dias_disponibles'=>$info->Dias_disponibles,
+'Dias_usados'=>$info->Dias_usados]);
+    if ($updated) {
+        return response()->json(['success' => true]);
+    } else {
+        return response()->json(['success' => false, 'message' => 'No se pudo actualizar'], 500);
+    }
 
 }
 }

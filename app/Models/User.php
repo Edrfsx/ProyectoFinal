@@ -23,6 +23,7 @@ class User extends Authenticatable
         'usuario',
         'password',
         'trabajador_id',
+        'jefe_id',
     ];
 
     /**
@@ -36,6 +37,9 @@ class User extends Authenticatable
 public function trabajador()
 {
     return $this->belongsTo(\App\Models\Trabajadores::class, 'trabajador_id');
+}
+public function jefe(){
+    return $this->belongsTo(\App\Models\Jefe::class,'jefe_id');
 }
     /**
      * The attributes that should be cast.
