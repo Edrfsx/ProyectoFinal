@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalVacaciones" tabindex="-1" aria-labelledby="modalVacacionesLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="{{ route('vacaciones.solicitar') }}" method="POST">
+      <form action="{{ route('vacaciones.solicitar') }}" id="formVacaciones" name="formVacaciones" method="POST">
         @csrf
         <div class="modal-header">
           <h5 class="modal-title" id="modalVacacionesLabel">Solicitar Vacaciones</h5>

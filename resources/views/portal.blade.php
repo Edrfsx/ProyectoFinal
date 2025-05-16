@@ -37,40 +37,49 @@
 
 @section('script')
     <script>
-        $(document).ready(function () {
-            $('#tabla-vacaciones').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route("vacaciones.listar") }}',
-                columns: [
-                    { data: 'Fecha_inicio', name: 'Fecha_inicio' },
-                    { data: 'Fecha_fin', name: 'Fecha_fin' },
-                    { data: 'Estado', name: 'Estado' }
-                ]
-            });
-        });
+$(document).ready(function () {
+    const tabla = $('#tabla-vacaciones').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route("vacaciones.listar") }}',
+        columns: [
+            { data: 'Fecha_inicio', name: 'Fecha_inicio' },
+            { data: 'Fecha_fin', name: 'Fecha_fin' },
+            { data: 'Estado', name: 'Estado' }
+        ]
+    });
+
+    $('#formVacaciones').submit(function (e) {
+        e.preventDefault();
+
+        const Fecha_inicio = $('#Fecha_inicio').val();
+        const Fecha_fin = $('#Fecha_fin').val();
 
         $.ajax({
-    url: '/Vacalog/vacaciones/solicitar',
-    type: 'POST',
-    data: {
-        Fecha_inicio: Fecha_inicio,
-        Fecha_fin: Fecha_fin,
-        _token: '{{ csrf_token() }}'
-    },
-    success: function (data) {
-        Swal.fire('Solicitud enviada', 'Tu solicitud fue registrada.', 'success');
-        tabla.ajax.reload();
-    },
-    error: function (xhr) {
-        if (xhr.status === 422) {
-            const message = xhr.responseJSON.message || 'Error en la solicitud.';
-            Swal.fire('Error', message, 'error');
-        } else {
-            Swal.fire('Error', 'Ocurrió un problema al enviar la solicitud.', 'error');
-        }
-    }
+            url: '/Vacalog/vacaciones/solicitar',
+            type: 'POST',
+            data: {
+                Fecha_inicio: Fecha_inicio,
+                Fecha_fin: Fecha_fin,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (data) {
+                Swal.fire('Solicitud enviada', 'Tu solicitud fue registrada.', 'success');
+                tabla.ajax.reload();
+                $('#modalVacaciones').modal('hide');
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    const message = xhr.responseJSON.message || 'Días excedidos o inválidos.';
+                    Swal.fire('Advertencia', message, 'warning');
+                } else {
+                    Swal.fire('Error', 'Ocurrió un problema al enviar la solicitud.', 'error');
+                }
+            }
+        });
+    });
 });
+
 
     </script>
 @endsection
