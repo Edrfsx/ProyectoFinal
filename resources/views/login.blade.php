@@ -9,7 +9,6 @@
         <div class="col-lg-6 col-md-6 col-xs-6 p-0 position-relative">
     <img src="{{ asset('images/fondo.jpg') }}" class="img-fluid" style="height: 90vh; object-fit: cover;">
 
-    <!-- Sombra blanca en el borde derecho de la imagen -->
     <div class="position-absolute top-0 end-0 h-100" style="
         width: 20%;
         background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);

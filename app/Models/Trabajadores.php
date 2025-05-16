@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 
 class Trabajadores extends Model{
-    protected $table = 'Trabajadores'; // Nombre de la tabla en la BD
+    protected $table = 'Trabajadores';
 
     protected $fillable = [
         'Nombre',

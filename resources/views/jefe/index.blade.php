@@ -40,7 +40,6 @@
             ]
         });
 
-        // ACEPTAR
         $('#tabla-vaca').on('click', '.aceptar', function (e) {
             e.preventDefault();
             console.log("hols");
@@ -74,7 +73,6 @@
             });
         });
 
-        // DENEGAR
         $('#tabla-vaca').on('click', '.denegar', function (e) {
             e.preventDefault();
             let id = $(this).data('id');

@@ -9,7 +9,7 @@ class Vacaciones extends Model
 {
     use HasFactory;
 
-    protected $table = 'Vacaciones'; // nombre de la tabla
+    protected $table = 'Vacaciones';
 
     protected $fillable = [
         'trabajador_id',

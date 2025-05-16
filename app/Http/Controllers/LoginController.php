@@ -64,7 +64,6 @@ class LoginController extends Controller{
 
 public function registrarTrabajador(Request $request)
 {
-    // Crear un nuevo trabajador pasando los campos manualmente
     $trabajador = \App\Models\Trabajadores::create([
         'Nombre' => $request->input('Nombre'),
         'Apellidos' => $request->input('Apellidos'),

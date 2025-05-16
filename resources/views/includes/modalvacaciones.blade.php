@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="modalVacaciones" tabindex="-1" aria-labelledby="modalVacacionesLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

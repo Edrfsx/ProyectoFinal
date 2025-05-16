@@ -25,15 +25,12 @@ public function store(Request $request)
 {
     $user = Auth::user();
 
-    // Buscar el InfoVacaciones correspondiente
     $info = \App\Models\InfoVacaciones::where('trabajador_id', $user->trabajador_id)->first();
 
-    // Calcular la cantidad de días solicitados
     $inicio = Carbon::parse($request->input('Fecha_inicio'));
     $fin = Carbon::parse($request->input('Fecha_fin'));
     $diasSolicitados = $inicio->diffInDays($fin) + 1;
 
-    // Validar si tiene días suficientes
     if ($info->Dias_disponibles < $diasSolicitados) {
         if ($request->ajax()) {
             return response()->json(['success' => false, 'message' => 'Límite de días superado.'], 422);
@@ -42,7 +39,6 @@ public function store(Request $request)
         }
     }
 
-    // Crear el registro de vacaciones incluyendo la foreign key
     $data = \App\Models\Vacaciones::create([
         'trabajador_id' => $user->trabajador_id,
         'info_vacaciones_id' => $info->Id,
