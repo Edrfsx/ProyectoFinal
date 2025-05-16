@@ -42,5 +42,14 @@
 @endsection
 
 @section('script')
-
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Error de autenticación',
+        text: '{{ session('error') }}',
+        confirmButtonText: 'Entendido'
+    });
+</script>
+@endif
 @endsection

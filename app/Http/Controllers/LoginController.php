@@ -16,28 +16,30 @@ class LoginController extends Controller{
         return view("login");
     }
 
-    public function login(Request $request){    
-        if (Auth::attempt([
-            'usuario' => $request->usuario, 'password' => $request->password])) {
+public function login(Request $request)
+{    
+    if (Auth::attempt([
+        'usuario' => $request->usuario, 
+        'password' => $request->password
+    ])) {
+        $usu = \App\Models\User::where('usuario', $request->usuario)->first();
 
+        $request->session()->regenerate();
 
-                $usu = \App\Models\User::where('usuario',$request->usuario)
-                ->first();
+        if ($usu->trabajador_id > 0) {
+            return redirect()->intended(route("portal.index"));
+        }
 
-                if($usu->trabajador_id >0){
-            $request->session()->regenerate();
-            return redirect()->intended(route("portal.index"));}
+        if ($usu->jefe_id > 0) {
+            return redirect()->intended(route("index.index"));
+        }
 
-            if($usu->jefe_id > 0 ){
-                $request->session()->regenerate();
-                return redirect()->intended(route("index.index"));
-            }
-
-        }else{
-            return redirect("/Vacalog/login");
-         }
-
+    } else {
+        // Flash para mostrar alerta en la vista
+        return redirect("/Vacalog/login")->with('error', 'Credenciales incorrectas');
     }
+}
+
 
     public function registrar(Request $request){
         $user = new User();
