@@ -35,7 +35,6 @@ public function login(Request $request)
         }
 
     } else {
-        // Flash para mostrar alerta en la vista
         return redirect("/Vacalog/login")->with('error', 'Credenciales incorrectas');
     }
 }
