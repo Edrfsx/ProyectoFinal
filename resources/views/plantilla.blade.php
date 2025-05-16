@@ -27,20 +27,20 @@
 </head>
 
 <body>
-    <div class="col-lg-12 container-fluid" style="width: 100vw; height: 10vh; background-color: #FB9E9E;
+    <div class="col-lg-12 col-md-12 col-xs-12 container-fluid" style="width: 100vw; height: 10vh; background-color: #FB9E9E;
     background: linear-gradient(to bottom, #FB9E9E 60%, rgba(0, 0, 0, 0.8) 100%);">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-xs-6">
                 <h1 style="margin-top:1vh; margin-left: 3vh;">Vacalog</h1>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-md-5 col-xs-5">
                 <h3 class="float-end" style="margin-top: 3vh;">
                     <p style="margin-right: 2em;">
                         @yield('barra')
                     </p>
                 </h3>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-1 col-xs-1">
                 @auth
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                         aria-expanded="false">

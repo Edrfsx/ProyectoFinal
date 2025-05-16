@@ -1,13 +1,12 @@
 @extends('plantilla')
 @section('barra')
-    Prueba
 @endsection
 
 @section('content')
 
-<div class="col-lg-12 container-fluid">
+<div class="col-lg-12 col-md-12 col-xs-12 container-fluid">
     <div class="row">
-        <div class="col-lg-6 p-0 position-relative">
+        <div class="col-lg-6 col-md-6 col-xs-6 p-0 position-relative">
     <img src="{{ asset('images/fondo.jpg') }}" class="img-fluid" style="height: 90vh; object-fit: cover;">
 
     <!-- Sombra blanca en el borde derecho de la imagen -->
@@ -17,7 +16,7 @@
     ">
     </div>
 </div>
-        <div class="col-lg-3 offset-lg-1">
+        <div class="col-lg-3 col-md-3 col-xs-3 offset-lg-1 offset-md-1 offset-xs-1">
             <div class="row ">
                 <form method="POST" action="{{ route('iniciar-sesion') }}">
                     @csrf

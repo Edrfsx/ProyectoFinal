@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="col-lg-12 col-md-12 col-xs-12">
-    <form method="POST" action="{{ route('registrar') }}">
+    <form method="POST" action="{{ route('trabajador.registrar') }}">
         @csrf
 
         <label>Nombre</label>

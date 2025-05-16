@@ -45,36 +45,40 @@ class LoginController extends Controller{
         $user->usuario = $request->usuario;
         $user->password = Hash::make($request->password);
         $user->trabajador_id = $request->trabajador_id;
-        $user->jefe_id = $request->jefe_id;
+        $user->jefe_id = 0;
 
         $user->save();
 
         Auth::login($user);
+
+        $infovaca = \App\Models\InfoVacaciones::create([
+            'trabajador_id'=>$request->trabajador_id,
+            'Dias_disponibles'=>44,
+            'Dias_usados'=>0,
+        ]);
         return redirect(route("login"));
 
 
 
     }
 
-    public function registrarTrabajador(Request $request)
+public function registrarTrabajador(Request $request)
 {
-    // Validar los campos
-    $validated = $request->validate([
-        'Nombre' => 'required|string|max:255',
-        'Apellidos' => 'required|string|max:255',
-        'Sexo' => 'required|in:Hombre,Mujer,Otros',
-        'Email' => 'required|email|unique:Trabajadores,Email',
-        'Ocupacion' => 'required|string|max:255',
-        'Salario' => 'required|numeric|min:0',
-        'Fecha_alta' => 'required|date',
+    // Crear un nuevo trabajador pasando los campos manualmente
+    $trabajador = \App\Models\Trabajadores::create([
+        'Nombre' => $request->input('Nombre'),
+        'Apellidos' => $request->input('Apellidos'),
+        'Sexo' => $request->input('Sexo'),
+        'Email' => $request->input('Email'),
+        'Ocupacion' => $request->input('Ocupacion'),
+        'Salario' => $request->input('Salario'),
+        'Fecha_alta' => $request->input('Fecha_alta'),
     ]);
 
-    // Crear un nuevo trabajador
-    $trabajador = \App\Models\Trabajadores::create($validated);
-
-    // Redireccionar o retornar respuesta
-    return redirect()->back()->with('success', 'Trabajador registrado correctamente');
+    return redirect(route('login'));
 }
+
+
 
 
     public function logout(Request $request){

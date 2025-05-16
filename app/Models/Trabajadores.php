@@ -21,4 +21,6 @@ class Trabajadores extends Model{
         'Salario',
         'Fecha_alta',
     ];
+
+    public $timestamps = false;
 }

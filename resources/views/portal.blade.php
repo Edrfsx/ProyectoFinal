@@ -11,10 +11,10 @@
         <div class="d-flex justify-content-center mt-5">
             <div class="text-center" style="max-width: 600px; width: 100%;">
                 @if ($infoVacaciones)
-                    <p>Días disponibles: {{ $infoVacaciones->Dias_disponibles }}</p>
-                    <p>Días usados: {{ $infoVacaciones->Dias_usados }}</p>
+                    <p>Días Naturales Disponibles: {{ $infoVacaciones->Dias_disponibles }}</p>
+                    <p>Días Naturales Usados: {{ $infoVacaciones->Dias_usados }}</p>
                 @endif
-                <button type="button" class="btn btn-success mb-3 pull-right" data-bs-toggle="modal" data-bs-target="#modalVacaciones">
+                <button type="button" class="btn btn-success mb-3 pull-right" style="margin-left: 35dvw" data-bs-toggle="modal" data-bs-target="#modalVacaciones">
                     Solicitar Vacaciones
                 </button>
 

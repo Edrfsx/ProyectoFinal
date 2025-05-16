@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class PortalController extends Controller{
 
@@ -16,10 +18,14 @@ public function index()
     $trabajador = $user->trabajador;
     $infoVacaciones = \App\Models\InfoVacaciones::where('trabajador_id', $user->trabajador_id)->first();
 
+    
 
 
     return view('portal', compact('trabajador','infoVacaciones'));
 }
+
+
+
 
 
 
